@@ -1,0 +1,8 @@
+import { FastifySchema } from 'fastify'
+
+export const get{{pascalCase collection_name}}FastifySchema: FastifySchema = {
+  summary: 'Get all products',
+  tags: ['{{pascalCase collection_name}}'],
+  security: [{}],
+  response: {}
+} satisfies FastifySchema

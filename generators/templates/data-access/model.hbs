@@ -1,0 +1,15 @@
+import mongoose from 'mongoose'
+import { {{pascalCase collection_name}} } from '@/domain/{{lowerCase collection_name}}/{{lowerCase collection_name}}.schema'
+import { v4 as uuidv4 } from 'uuid'
+
+
+// Define the {{camelCase collection_name}} schema
+const {{camelCase collection_name}}Schema = new mongoose.Schema<{{pascalCase collection_name}}>({
+  {{camelCase collection_name}}Id: { type: String, default: uuidv4() },
+  {{camelCase collection_name}}Name: { type: String, required: false }
+})
+
+export const {{camelCase collection_name}}Model = mongoose.model<{{pascalCase collection_name}}>(
+  '{{camelCase collection_name}}',
+  {{camelCase collection_name}}Schema
+)

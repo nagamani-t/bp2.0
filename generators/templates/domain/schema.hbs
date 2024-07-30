@@ -1,0 +1,38 @@
+import { Static, Type } from '@sinclair/typebox'
+
+// {{pascalCase collection_name}} Schema
+export const {{camelCase collection_name}}Schema = Type.Object({
+  {{camelCase collection_name}}Id: Type.String(),
+  {{camelCase collection_name}}Name: Type.String(),
+  _id: Type.Optional(Type.String())
+})
+
+// Type Alias for {{pascalCase collection_name}}
+export type {{pascalCase collection_name}} = Static<typeof {{camelCase collection_name}}Schema>
+
+// CRUD Operation Schemas
+
+// 1. Request schema for creating a new {{lowerCase collection_name}}.
+export const create{{pascalCase collection_name}}RequestDTO = Type.Omit({{camelCase collection_name}}Schema, [
+  '_id',
+  '{{camelCase collection_name}}Id'
+])
+
+// 3. Request schema for reading an existing {{lowerCase collection_name}}.
+export const read{{pascalCase collection_name}}RequestParamSchema = Type.Object({
+  {{camelCase collection_name}}Id: Type.String()
+})
+
+// 5. Request schema for updating an existing {{lowerCase collection_name}}.
+export const update{{pascalCase collection_name}}RequestSchema = Type.Partial(
+  Type.Omit({{camelCase collection_name}}Schema, ['_id', '{{lowerCase collection_name}}Id'])
+)
+export const update{{pascalCase collection_name}}RequestParamSchema = Type.Object({
+  {{camelCase collection_name}}Id: Type.String(),
+})
+export type Update{{pascalCase collection_name}} = Static<typeof update{{pascalCase collection_name}}RequestSchema>
+
+// 7. Request schema for deleting an existing {{lowerCase collection_name}}.
+export const delete{{pascalCase collection_name}}RequestParamSchema = Type.Object({
+  {{camelCase collection_name}}Id: Type.String()
+})

@@ -1,0 +1,78 @@
+import {
+  create{{pascalCase collection_name}}RequestDTO,
+  delete{{pascalCase collection_name}}RequestParamSchema,
+  read{{pascalCase collection_name}}RequestParamSchema,
+  Update{{pascalCase collection_name}}
+} from '@/domain/{{lowerCase collection_name}}/{{lowerCase collection_name}}.schema'
+import { {{camelCase collection_name}}Model } from './models/{{lowerCase collection_name}}.model'
+
+const get{{pascalCase collection_name}} = async () => {
+  try {
+    const {{camelCase collection_name}} = await {{camelCase collection_name}}Model.find({}) // Find all {{camelCase collection_name}}
+    return {{camelCase collection_name}}
+  } catch (error) {
+    throw error
+  }
+}
+const create{{pascalCase collection_name}} = async (new{{pascalCase collection_name}}: typeof create{{pascalCase collection_name}}RequestDTO) => {
+  return await {{camelCase collection_name}}Model.create(new{{pascalCase collection_name}})
+}
+
+const update{{pascalCase collection_name}} = async ({{camelCase collection_name}}Id: string, {{camelCase collection_name}}: Update{{pascalCase collection_name}}) => {
+  try {
+    const updated{{pascalCase collection_name}} = await {{camelCase collection_name}}Model.findOneAndUpdate(
+      { {{camelCase collection_name}}Id: {{camelCase collection_name}}Id },
+      {
+        $set: {
+          {{camelCase collection_name}}Name: {{camelCase collection_name}}.{{camelCase collection_name}}Name
+        }
+      },
+      { new: true } // This option returns the updated document
+    ).lean()
+
+    return updated{{pascalCase collection_name}} // Return the updated document
+  } catch (err) {
+    console.error(err)
+    throw err // Rethrow the error so it can be handled elsewhere
+  }
+}
+
+const delete{{pascalCase collection_name}} = async (
+  {{camelCase collection_name}}Id: typeof delete{{pascalCase collection_name}}RequestParamSchema
+) => {
+  try {
+    const {{camelCase collection_name}} = await {{camelCase collection_name}}Model.deleteOne({
+      {{camelCase collection_name}}Id: {{camelCase collection_name}}Id
+    })
+
+    if ({{camelCase collection_name}}) {
+      return 'DELETED SUCESSFULLY'
+    } else {
+      return 'ERROR SOMETHING WRONG'
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
+const getOne{{pascalCase collection_name}} = async (
+  {{camelCase collection_name}}Id: typeof read{{pascalCase collection_name}}RequestParamSchema
+) => {
+  try {
+    const {{camelCase collection_name}} = await {{camelCase collection_name}}Model.findOne({
+      {{camelCase collection_name}}Id: {{camelCase collection_name}}Id
+    })
+
+    return {{camelCase collection_name}}
+  } catch (error) {
+    throw error
+  }
+}
+
+export {
+  get{{pascalCase collection_name}},
+  create{{pascalCase collection_name}},
+  update{{pascalCase collection_name}},
+  delete{{pascalCase collection_name}},
+  getOne{{pascalCase collection_name}}
+}

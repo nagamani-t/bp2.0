@@ -1,0 +1,16 @@
+import { FastifySchema } from 'fastify'
+import {
+  // read{{pascalCase collection_name}}RequestParamSchema,
+  {{lowerCase collection_name}}Schema
+  create{{pascalCase collection_name}}RequestDTO
+} from '@/domain/{{camelCase collection_name}}/{{camelCase collection_name}}.schema'
+
+export const create{{pascalCase collection_name}}FastifySchema = {
+  summary: 'Create {{camelCase collection_name}} schema',
+  tags: ['{{pascalCase collection_name}}'],
+  security: [{}],
+  body: create{{pascalCase collection_name}}RequestDTO,
+  response: {
+    200: {{camelCase collection_name}}Schema
+  }
+} satisfies FastifySchema

@@ -1,0 +1,8 @@
+import { get{{pascalCase collection_name}} } from "@/data-access/{{lowerCase collection_name}}.repo"
+
+const get{{pascalCase collection_name}}UseCase = async() => {
+  const getAll{{pascalCase collection_name}} = await get{{pascalCase collection_name}}()
+  return getAll{{pascalCase collection_name}}
+}
+
+export default get{{pascalCase collection_name}}UseCase

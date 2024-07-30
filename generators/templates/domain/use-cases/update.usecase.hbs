@@ -1,0 +1,12 @@
+import { update{{pascalCase collection_name}} } from '@/data-access/{{lowerCase collection_name}}.repo'
+import { Update{{pascalCase collection_name}} } from '@/domain/{{lowerCase collection_name}}/{{lowerCase collection_name}}.schema'
+
+const update{{pascalCase collection_name}}UseCase = async (
+  {{camelCase collection_name}}Id: string,
+  {{camelCase collection_name}}: Update{{pascalCase collection_name}}
+) => {
+  const updated{{pascalCase collection_name}} = await update{{pascalCase collection_name}}({{camelCase collection_name}}Id, {{camelCase collection_name}})
+  return updated{{pascalCase collection_name}}
+}
+
+export default update{{pascalCase collection_name}}UseCase

@@ -1,0 +1,79 @@
+import {
+  FastifyPluginAsyncTypebox,
+  TypeBoxTypeProvider
+} from '@fastify/type-provider-typebox'
+
+import { get{{pascalCase collection_name}}FastifySchema } from '@/domain/{{lowerCase collection_name}}/use-cases/get-{{lowerCase collection_name}}/get-{{lowerCase collection_name}}.schema'
+import create{{pascalCase collection_name}}UseCase from '@/domain/{{lowerCase collection_name}}/use-cases/create-{{lowerCase collection_name}}'
+import { create{{pascalCase collection_name}}FastifySchema } from '@/domain/{{lowerCase collection_name}}/use-cases/create-{{lowerCase collection_name}}/create-{{lowerCase collection_name}}.schema'
+import get{{pascalCase collection_name}}UseCase from '@/domain/{{lowerCase collection_name}}/use-cases/get-{{lowerCase collection_name}}/get-{{lowerCase collection_name}}.usecase'
+import { update{{pascalCase collection_name}}FastifySchema } from '@/domain/{{lowerCase collection_name}}/use-cases/update-{{lowerCase collection_name}}/update-{{lowerCase collection_name}}.schema'
+import update{{pascalCase collection_name}}UseCase from '@/domain/{{lowerCase collection_name}}/use-cases/update-{{lowerCase collection_name}}/update-{{lowerCase collection_name}}.usecase'
+import { delete{{pascalCase collection_name}}FastifySchema } from '@/domain/{{lowerCase collection_name}}/use-cases/delete-{{lowerCase collection_name}}/delete-{{lowerCase collection_name}}.schema'
+import delete{{pascalCase collection_name}}UseCase from '@/domain/{{lowerCase collection_name}}/use-cases/delete-{{lowerCase collection_name}}/delete-{{lowerCase collection_name}}.usecase'
+import { getOne{{pascalCase collection_name}}FastifySchema } from '@/domain/{{lowerCase collection_name}}/use-cases/getone-{{lowerCase collection_name}}/getone-{{lowerCase collection_name}}.schema'
+import getOne{{pascalCase collection_name}}UseCase from '@/domain/{{lowerCase collection_name}}/use-cases/getone-{{lowerCase collection_name}}/getone-{{lowerCase collection_name}}.usecase'
+
+
+const {{lowerCase collection_name}}: FastifyPluginAsyncTypebox = async (
+  fastify,
+  opts
+): Promise<void> => {
+  fastify
+    .withTypeProvider<TypeBoxTypeProvider>()
+    .get('/', { schema: get{{pascalCase collection_name}}FastifySchema }, async function () {
+      const getAll{{camelCase collection_name}} = await get{{pascalCase collection_name}}UseCase()
+      return getAll{{camelCase collection_name}}
+    })
+    .post(
+      '/',
+      { schema: create{{pascalCase collection_name}}FastifySchema },
+      async function (request: any, reply) {
+        const {{camelCase collection_name}} = await create{{pascalCase collection_name}}UseCase(request.body)
+        return {{camelCase collection_name}}
+      }
+    )
+    .put(
+      '/:{{lowerCase collection_name}}Id',
+      { schema: update{{pascalCase collection_name}}FastifySchema },
+      async function (request: any, reply) {
+        const {{camelCase collection_name}}Id = request.params.{{camelCase collection_name}}Id
+        const {{camelCase collection_name}}Body = request.body
+
+        // Call the update{{pascalCase collection_name}}UseCase with the extracted parameters
+        const updated{{pascalCase collection_name}} = await update{{pascalCase collection_name}}UseCase(
+          {{camelCase collection_name}}Id,
+          {{camelCase collection_name}}Body
+        )
+
+        
+        if (updated{{pascalCase collection_name}}) {
+          reply.code(200).send(updated{{pascalCase collection_name}})
+        }
+
+
+
+      }
+    )
+    .delete(
+      '/:{{camelCase collection_name}}Id',
+      { schema: delete{{pascalCase collection_name}}FastifySchema },
+      async function (request: any, reply) {
+        let {{camelCase collection_name}}Id = request.params.{{camelCase collection_name}}Id
+        const {{camelCase collection_name}} = await delete{{pascalCase collection_name}}UseCase({{camelCase collection_name}}Id)
+
+        return {{camelCase collection_name}}
+      }
+    )
+    .get(
+      '/:{{camelCase collection_name}}Id',
+      { schema: getOne{{pascalCase collection_name}}FastifySchema },
+      async function (request: any, reply) {
+        let {{camelCase collection_name}}Id = request.params.{{camelCase collection_name}}Id
+        const {{camelCase collection_name}} = await getOne{{pascalCase collection_name}}UseCase({{camelCase collection_name}}Id)
+        return {{camelCase collection_name}}
+      }
+    )
+}
+
+export default {{camelCase collection_name}}

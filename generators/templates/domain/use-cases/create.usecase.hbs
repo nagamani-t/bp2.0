@@ -1,0 +1,13 @@
+import { create{{pascalCase collection_name}} } from '@/data-access/{{lowerCase collection_name}}.repo'
+import { create{{pascalCase collection_name}}RequestDTO } from '@/domain/{{lowerCase collection_name}}/{{lowerCase collection_name}}.schema'
+
+const create{{pascalCase collection_name}}UseCase = async (new{{pascalCase collection_name}}: typeof create{{pascalCase collection_name}}RequestDTO) => {
+  const new{{pascalCase collection_name}}Created = await create{{pascalCase collection_name}}(new{{pascalCase collection_name}})
+  if (!new{{pascalCase collection_name}}Created) {
+    throw new Error('Error creating {{lowerCase collection_name}}')
+  }
+
+  return new{{pascalCase collection_name}}Created
+}
+
+export default create{{pascalCase collection_name}}UseCase

@@ -1,0 +1,11 @@
+import { delete{{pascalCase collection_name}} } from '@/data-access/{{lowerCase collection_name}}.repo'
+import { delete{{pascalCase collection_name}}RequestParamSchema } from '@/domain/{{lowerCase collection_name}}/{{lowerCase collection_name}}.schema'
+
+const delete{{pascalCase collection_name}}UseCase = async (
+  {{camelCase collection_name}}Id: typeof delete{{pascalCase collection_name}}RequestParamSchema
+) => {
+  let data = await delete{{pascalCase collection_name}}({{camelCase collection_name}}Id)
+  return data
+}
+
+export default delete{{pascalCase collection_name}}UseCase
