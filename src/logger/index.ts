@@ -1,9 +1,11 @@
 import { type Logger, type LoggerConfiguration } from "./definition";
 import PinoLogger from "./pino.logger";
-import { metricsExporter } from "../error-handeling";
+
 
 export class LoggerWrapper implements Logger {
+  // @ts-expect-error description: 'abcd'
   #underlyingLogger: Logger | undefined = null;
+
   configureLogger(
     configuration: Partial<LoggerConfiguration>,
     overrideIfExists = true,
@@ -17,6 +19,7 @@ export class LoggerWrapper implements Logger {
   }
 
   resetLogger() {
+
     this.#underlyingLogger = null;
   }
 
@@ -38,7 +41,7 @@ export class LoggerWrapper implements Logger {
   }
 
   #getInitializeLogger(): Logger {
-    this.configureLogger({}, false);
+    this.configureLogger({ prettyPrint: true }, false);
 
     return this.#underlyingLogger!;
   }
